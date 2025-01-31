@@ -43,13 +43,22 @@ public class DemoSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         http.authorizeHttpRequests(configurer ->
                 configurer
-                          .anyRequest().authenticated()
+                        .requestMatchers("/" ).hasRole("EMPLOYEE")
+                        .requestMatchers("/leaders/**" ).hasRole("MANAGER")
+                        .requestMatchers("/systems/**" ).hasRole("ADMIN")
+                        .anyRequest().authenticated()
         )
                 .formLogin(form ->
                         form
                                 .loginPage("/showMyLoginPage")
                                 .loginProcessingUrl("/authenticateTheUser")
                                 .permitAll()
+                )
+                .logout(logout ->
+                        logout.permitAll()
+                )
+                .exceptionHandling(configurer ->
+                        configurer.accessDeniedPage("/access-denied")
                 );
         return http.build();
     }
