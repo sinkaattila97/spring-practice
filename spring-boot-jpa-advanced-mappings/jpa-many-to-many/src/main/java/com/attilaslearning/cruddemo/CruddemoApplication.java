@@ -1,10 +1,7 @@
 package com.attilaslearning.cruddemo;
 
 import com.attilaslearning.cruddemo.dao.AppDAO;
-import com.attilaslearning.cruddemo.entity.Course;
-import com.attilaslearning.cruddemo.entity.Instructor;
-import com.attilaslearning.cruddemo.entity.InstructorDetail;
-import com.attilaslearning.cruddemo.entity.Review;
+import com.attilaslearning.cruddemo.entity.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,9 +19,49 @@ public class CruddemoApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(AppDAO appDAO) {
 		return runner -> {
+			//createCourseAndStudents(appDAO);
+			//findCourseAndStudents(appDAO);
+			findStudentsAndCoursesByStudentId(appDAO);
 
 
 		};
+	}
+
+	private void findStudentsAndCoursesByStudentId(AppDAO appDAO) {
+		int theId = 1;
+		Student tempStudent = appDAO.findStudentAndCoursesByStudentId(theId);
+
+		System.out.println("Student: " + tempStudent);
+		System.out.println("Courses: " + tempStudent.getCourses());
+	}
+
+	private void findCourseAndStudents(AppDAO appDAO) {
+		int theId = 1;
+		Course tempCourse = appDAO.findCourseAndStudentsById(theId);
+
+		System.out.println("Course: " + tempCourse);
+		System.out.println("Students: " + tempCourse.getStudents());
+	}
+
+	private void createCourseAndStudents(AppDAO appDAO) {
+		//create course
+		Course tempCourse = new Course("Pacman - How to Score One Million Points");
+
+		//create the students
+		Student tempStudent1 = new Student("John", "Doe", "asd@asd.com");
+		Student tempStudent2 = new Student("Mike", "Oxlong", "qwe@qwe.com");
+
+		//add some students
+		tempCourse.addStudent(tempStudent1);
+		tempCourse.addStudent(tempStudent2);
+
+		//save the course and the associated students
+		System.out.println("Saving course: " + tempCourse);
+		System.out.println("Students: " + tempCourse.getStudents());
+
+		appDAO.save(tempCourse);
+		System.out.println("Done!");
+
 	}
 
 	private void deleteCourseAndReviews(AppDAO appDAO) {

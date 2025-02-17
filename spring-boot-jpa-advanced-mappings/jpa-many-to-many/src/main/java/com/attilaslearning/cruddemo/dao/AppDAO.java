@@ -2,6 +2,7 @@ package com.attilaslearning.cruddemo.dao;
 
 import com.attilaslearning.cruddemo.entity.Course;
 import com.attilaslearning.cruddemo.entity.Instructor;
+import com.attilaslearning.cruddemo.entity.Student;
 
 import java.util.List;
 
@@ -28,6 +29,10 @@ public interface AppDAO {
     void save(Course course);
 
     Course findCourseAndReviewsById(int id);
+
+    Course findCourseAndStudentsById(int id);
+
+    Student findStudentAndCoursesByStudentId(int id);
 
 
 }
