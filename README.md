@@ -1,3 +1,10 @@
+Key features:
+- Spring Boot Core features
+- JAP/Hibernate .. including @OneToOne, @OneToMany, @OneToMany, @ManyToMany
+- Spring Boot REST CRUD API
+- Spring MVC CRUD WebApp
+- Spring Security
+
 ## Notes:
 >DAO: Handles direct interaction with the database. It performs CRUD operations and abstracts the data access logic.
 
