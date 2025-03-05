@@ -5,4 +5,3 @@ Key features:
 - Spring MVC CRUD WebApp
 - Spring Security
 
-First we create the Entity and the basic controller then the Services and Repositories
